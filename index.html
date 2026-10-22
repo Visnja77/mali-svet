@@ -142,6 +142,48 @@ img,svg{max-width:100%}
 @keyframes srce{0%,44%{opacity:0;transform:translateY(0) scale(.5)}54%{opacity:1}74%{opacity:.9;transform:translateY(-42px) scale(1)}88%{opacity:0;transform:translateY(-70px)}100%{opacity:0}}
 /* scena se vrti uvek, i kad je na uređaju uključeno „smanji pokrete” */
 
+/* ---------- BUBAMARE: kratko se pomere, pa zastanu ---------- */
+.buba{position:absolute;display:block;pointer-events:none}
+.buba svg{display:block;width:100%;height:100%;filter:drop-shadow(0 2px 2px rgba(31,26,23,.25))}
+/* 1. šeta po brežuljku */
+.buba-breg{width:26px;height:26px;left:12%;bottom:46px;transform:rotate(75deg);animation:breg 16s ease-in-out infinite}
+@keyframes breg{
+  0%{left:12%;bottom:46px;transform:rotate(75deg)}
+  16%{left:19%;bottom:56px;transform:rotate(75deg)}
+  30%{left:19%;bottom:56px;transform:rotate(75deg)}
+  44%{left:27%;bottom:64px;transform:rotate(80deg)}
+  58%{left:27%;bottom:64px;transform:rotate(80deg)}
+  63%{left:27%;bottom:64px;transform:rotate(255deg)}
+  80%{left:12%;bottom:46px;transform:rotate(255deg)}
+  93%{left:12%;bottom:46px;transform:rotate(255deg)}
+  100%{left:12%;bottom:46px;transform:rotate(435deg)}
+}
+/* 2. viri iza kartice programa */
+.program-omot{position:relative;display:flex;min-width:0}
+.program-omot .program{flex:1;position:relative;z-index:1}
+.buba-viri{width:32px;height:32px;top:-4px;right:38px;z-index:0;transform:translateY(30px);animation:viri 11s ease-in-out infinite}
+@keyframes viri{
+  0%,52%{transform:translateY(30px) rotate(0)}
+  60%{transform:translateY(-18px) rotate(0)}
+  66%{transform:translateY(-18px) rotate(-22deg)}
+  72%{transform:translateY(-18px) rotate(-22deg)}
+  77%{transform:translateY(-18px) rotate(20deg)}
+  83%{transform:translateY(-18px) rotate(0)}
+  92%,100%{transform:translateY(30px) rotate(0)}
+}
+/* 3. mala bubamara na dugmetu „Zakaži posetu“ */
+.btn-buba{position:relative}
+.buba-dugme{width:20px;height:20px;top:-14px;right:28px;animation:dugme 9s ease-in-out infinite}
+@keyframes dugme{
+  0%,55%{right:28px;transform:rotate(0)}
+  60%{right:28px;transform:rotate(90deg)}
+  70%{right:10px;transform:rotate(90deg)}
+  75%,82%{right:10px;transform:rotate(0)}
+  86%{right:10px;transform:rotate(-90deg)}
+  96%{right:28px;transform:rotate(-90deg)}
+  100%{right:28px;transform:rotate(0)}
+}
+
 /* ---------- traka sa činjenicama ---------- */
 .cinjenice{background:var(--tekst);color:#fff}
 .cinjenice .omot{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;padding-block:22px}
@@ -332,6 +374,21 @@ footer a{color:#fff}
       <circle cx="38" cy="57" r="3.6" fill="#F58C8C" opacity=".6"/><circle cx="62" cy="57" r="3.6" fill="#F58C8C" opacity=".6"/>
       <path d="M44 58 Q50 64 56 58" stroke="#2A1E16" stroke-width="2.2" fill="none" stroke-linecap="round"/>
     </symbol>
+    <symbol id="bubamara" viewBox="0 0 40 40">
+      <g stroke="#1F1A17" stroke-width="2" stroke-linecap="round">
+        <path d="M9 17l-5-3M8 24H3M9 31l-5 3M31 17l5-3M32 24h5M31 31l5 3"/>
+        <path d="M17 5l-3-4M23 5l3-4" stroke-width="1.6"/>
+      </g>
+      <circle cx="14" cy="1.2" r="1.6" fill="#1F1A17"/><circle cx="26" cy="1.2" r="1.6" fill="#1F1A17"/>
+      <ellipse cx="20" cy="10" rx="7" ry="6" fill="#1F1A17"/>
+      <circle cx="17" cy="8.5" r="1.4" fill="#fff"/><circle cx="23" cy="8.5" r="1.4" fill="#fff"/>
+      <ellipse cx="20" cy="24" rx="13" ry="14" fill="#E63A2E"/>
+      <path d="M20 10.5V38" stroke="#1F1A17" stroke-width="1.8"/>
+      <circle cx="13.5" cy="19" r="2.8" fill="#1F1A17"/><circle cx="26.5" cy="19" r="2.8" fill="#1F1A17"/>
+      <circle cx="12.5" cy="28" r="2.4" fill="#1F1A17"/><circle cx="27.5" cy="28" r="2.4" fill="#1F1A17"/>
+      <circle cx="20" cy="34" r="1.8" fill="#1F1A17"/>
+      <ellipse cx="14" cy="14.5" rx="3" ry="1.6" fill="#fff" opacity=".45" transform="rotate(-30 14 14.5)"/>
+    </symbol>
     <symbol id="srce" viewBox="0 0 24 24"><path d="M12 21s-7-4.35-9.33-9.02C1.24 9.26 2.4 6 5.5 6 7.24 6 8.5 7 12 10.5 15.5 7 16.76 6 18.5 6c3.1 0 4.26 3.26 2.83 5.98C19 16.65 12 21 12 21z"/></symbol>
     <!-- logo globus -->
     <symbol id="logo-globus" viewBox="0 0 48 48">
@@ -410,7 +467,7 @@ footer a{color:#fff}
       <span class="slogan">Veliko srce za male istraživače</span>
       <p class="uvod">Privatni vrtić u Beogradu gde deca uče kroz igru, priču i boravak napolju. Male grupe, topli vaspitači i dan koji ima svoj ritam.</p>
       <div class="akcije">
-        <a class="btn btn-koral" href="#kontakt">Zakaži posetu</a>
+        <a class="btn btn-koral btn-buba" href="#kontakt">Zakaži posetu<span class="buba buba-dugme" aria-hidden="true"><svg><use href="#bubamara"/></svg></span></a>
         <a class="btn btn-okean" href="#subvencije">Upis uz subvenciju</a>
       </div>
     </div>
@@ -477,6 +534,7 @@ footer a{color:#fff}
       <div class="planeta"></div>
       <svg class="drvo" style="left:4%;bottom:60px" width="54" height="80" viewBox="0 0 54 80"><rect x="23" y="44" width="8" height="34" rx="3" fill="#8A5A36"/><circle cx="27" cy="30" r="24" fill="#3E9A3A"/><circle cx="18" cy="24" r="6" fill="#F2683C"/><circle cx="34" cy="36" r="5" fill="#F2683C"/></svg>
       <svg class="drvo" style="right:5%;bottom:58px" width="64" height="58" viewBox="0 0 64 58"><path d="M6 56V26L32 6l26 20v30z" fill="#fff"/><path d="M0 28L32 2l32 26" stroke="#F2683C" stroke-width="7" fill="none" stroke-linejoin="round"/><rect x="25" y="34" width="14" height="22" rx="3" fill="#FFC23C"/><rect x="11" y="32" width="9" height="9" rx="2" fill="#6CC3EE"/><rect x="44" y="32" width="9" height="9" rx="2" fill="#6CC3EE"/></svg>
+      <span class="buba buba-breg"><svg><use href="#bubamara"/></svg></span>
       <svg class="dete decak" viewBox="0 0 100 160"><use href="#lik-decak"/></svg>
       <svg class="dete devojcica" viewBox="0 0 100 160"><use href="#lik-devojcica"/></svg>
       <svg class="zagrljaj" viewBox="0 0 150 160">
@@ -609,10 +667,13 @@ footer a{color:#fff}
         <div class="ilu" style="background:rgba(46,155,214,.14)"><svg viewBox="0 0 120 100"><rect x="30" y="20" width="60" height="50" rx="6" fill="#fff" stroke="#1F3346" stroke-width="3"/><circle cx="48" cy="40" r="8" fill="#FFC23C"/><path d="M34 64l18-16 12 10 10-8 14 14z" fill="#58B44A"/><path d="M40 70l-8 22M80 70l8 22" stroke="#8A5A36" stroke-width="4" stroke-linecap="round"/></svg></div>
         <div class="telo"><span class="uzrast">3 – 5,5 godina</span><h3>Vrtić</h3><p>Kreativne radionice, muzika, priča i pokret. Deca uče da sarađuju, pitaju i završe ono što su započela.</p></div>
       </article>
+      <div class="program-omot">
+      <span class="buba buba-viri" aria-hidden="true"><svg><use href="#bubamara"/></svg></span>
       <article class="program">
         <div class="ilu" style="background:rgba(88,180,74,.16)"><svg viewBox="0 0 120 100"><rect x="34" y="26" width="52" height="58" rx="12" fill="#F2683C"/><rect x="42" y="18" width="36" height="20" rx="8" fill="none" stroke="#D9512A" stroke-width="5"/><rect x="44" y="46" width="32" height="24" rx="5" fill="#FFC23C"/><path d="M50 58h20" stroke="#fff" stroke-width="3" stroke-linecap="round"/></svg></div>
         <div class="telo"><span class="uzrast">5,5 – 6,5 godina</span><h3>Pripremni predškolski</h3><p>Obavezni program pred polazak u školu, verifikovan od Ministarstva prosvete. Slova, brojevi, pažnja i samopouzdanje.</p></div>
       </article>
+      </div>
     </div>
   </div>
 </section>
