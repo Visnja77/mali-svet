@@ -134,6 +134,11 @@ img,svg{max-width:100%}
 .srce{position:absolute;bottom:62%;width:22px;height:22px;opacity:0;animation:srce var(--t) ease-in-out infinite}
 .srce svg{width:100%;height:100%}
 .srce.s1{left:45%;animation-delay:.1s}.srce.s2{left:52%;animation-delay:.35s}.srce.s3{left:48.5%;animation-delay:.6s}
+.mah{transform-box:fill-box;animation:mahanje .55s ease-in-out infinite alternate}
+.mah-l{transform-origin:85% 90%;animation-name:mahanje-l}
+.mah-d{transform-origin:15% 90%;animation-name:mahanje-d;animation-delay:.27s}
+@keyframes mahanje-l{from{transform:rotate(-20deg)}to{transform:rotate(2deg)}}
+@keyframes mahanje-d{from{transform:rotate(20deg)}to{transform:rotate(-2deg)}}
 @keyframes srce{0%,44%{opacity:0;transform:translateY(0) scale(.5)}54%{opacity:1}74%{opacity:.9;transform:translateY(-42px) scale(1)}88%{opacity:0;transform:translateY(-70px)}100%{opacity:0}}
 /* scena se vrti uvek, i kad je na uređaju uključeno „smanji pokrete” */
 
@@ -475,8 +480,43 @@ footer a{color:#fff}
       <svg class="dete decak" viewBox="0 0 100 160"><use href="#lik-decak"/></svg>
       <svg class="dete devojcica" viewBox="0 0 100 160"><use href="#lik-devojcica"/></svg>
       <svg class="zagrljaj" viewBox="0 0 150 160">
-        <g transform="rotate(5 37 150)"><use href="#lik-decak" x="-2" y="0" width="100" height="160"/></g>
-        <g transform="rotate(-5 113 150)"><use href="#lik-devojcica" x="52" y="0" width="100" height="160"/></g>
+<g transform="rotate(5 37 150)"><g transform="translate(-2 0)">
+      <rect x="38" y="116" width="9" height="34" rx="4" fill="#F4C7A1"/>
+      <rect x="53" y="116" width="9" height="34" rx="4" fill="#F4C7A1"/>
+      <ellipse cx="41" cy="152" rx="10" ry="5.5" fill="#2E4A8C"/>
+      <ellipse cx="59" cy="152" rx="10" ry="5.5" fill="#2E4A8C"/>
+      <rect x="34" y="98" width="32" height="24" rx="6" fill="#2E9BD6"/>
+      <g class="mah mah-l"><path d="M33 80 L20 58" stroke="#F4C7A1" stroke-width="8" stroke-linecap="round"/>
+      <circle cx="19" cy="55" r="6" fill="#F4C7A1"/></g>
+      <path d="M67 80 L76 102" stroke="#F4C7A1" stroke-width="8" stroke-linecap="round"/>
+      <rect x="31" y="70" width="38" height="36" rx="13" fill="#FFC23C"/>
+      <rect x="31" y="86" width="38" height="6" fill="#F2683C"/>
+      <circle cx="28" cy="49" r="5" fill="#F4C7A1"/><circle cx="72" cy="49" r="5" fill="#F4C7A1"/>
+      <circle cx="50" cy="47" r="22" fill="#F4C7A1"/>
+      <path d="M28 44 C28 22 72 22 72 44 C66 36 58 31 52 34 C46 30 36 34 28 44Z" fill="#6B3F22"/>
+      <circle cx="43" cy="49" r="2.6" fill="#2A1E16"/><circle cx="57" cy="49" r="2.6" fill="#2A1E16"/>
+      <circle cx="38" cy="56" r="3.6" fill="#F58C8C" opacity=".55"/><circle cx="62" cy="56" r="3.6" fill="#F58C8C" opacity=".55"/>
+      <path d="M44 57 Q50 63 56 57" stroke="#2A1E16" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+    </g></g>
+        <g transform="rotate(-5 113 150)"><g transform="translate(52 0)">
+      <rect x="39" y="112" width="8" height="38" rx="4" fill="#F4C7A1"/>
+      <rect x="53" y="112" width="8" height="38" rx="4" fill="#F4C7A1"/>
+      <ellipse cx="42" cy="152" rx="9.5" ry="5.5" fill="#7A5AD0"/>
+      <ellipse cx="58" cy="152" rx="9.5" ry="5.5" fill="#7A5AD0"/>
+      <g class="mah mah-d"><path d="M67 80 L80 58" stroke="#F4C7A1" stroke-width="8" stroke-linecap="round"/>
+      <circle cx="81" cy="55" r="6" fill="#F4C7A1"/></g>
+      <path d="M33 80 L24 102" stroke="#F4C7A1" stroke-width="8" stroke-linecap="round"/>
+      <path d="M36 70 H64 L76 118 H24 Z" fill="#F2683C"/>
+      <path d="M40 70 H60 L56 78 H44 Z" fill="#fff"/>
+      <circle cx="40" cy="98" r="2.4" fill="#fff" opacity=".7"/><circle cx="55" cy="106" r="2.4" fill="#fff" opacity=".7"/><circle cx="62" cy="92" r="2.4" fill="#fff" opacity=".7"/>
+      <circle cx="24" cy="46" r="10" fill="#B4532A"/><circle cx="76" cy="46" r="10" fill="#B4532A"/>
+      <circle cx="79" cy="36" r="5" fill="#FFC23C"/>
+      <circle cx="50" cy="47" r="22" fill="#F4C7A1"/>
+      <path d="M28 46 C26 22 74 22 72 46 C70 38 64 32 56 32 C54 38 44 40 36 38 C32 40 30 42 28 46Z" fill="#B4532A"/>
+      <circle cx="43" cy="50" r="2.6" fill="#2A1E16"/><circle cx="57" cy="50" r="2.6" fill="#2A1E16"/>
+      <circle cx="38" cy="57" r="3.6" fill="#F58C8C" opacity=".6"/><circle cx="62" cy="57" r="3.6" fill="#F58C8C" opacity=".6"/>
+      <path d="M44 58 Q50 64 56 58" stroke="#2A1E16" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+    </g></g>
         <path d="M66 82 Q86 74 104 86" stroke="#F4C7A1" stroke-width="8" fill="none" stroke-linecap="round"/>
         <path d="M86 86 Q66 80 48 90" stroke="#F4C7A1" stroke-width="8" fill="none" stroke-linecap="round"/>
       </svg>
