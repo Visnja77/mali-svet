@@ -184,6 +184,23 @@ img,svg{max-width:100%}
   100%{right:28px;transform:rotate(0)}
 }
 
+/* bubamara koja leti do globusa i nazad */
+.hero{position:relative}
+.buba-let{position:absolute;left:0;top:0;width:22px;height:22px;margin:-11px 0 0 -11px;z-index:5;pointer-events:none;opacity:0;will-change:transform}
+.buba-let svg{width:100%;height:100%;overflow:visible;display:block;filter:drop-shadow(0 3px 3px rgba(31,26,23,.25))}
+.buba-let .pokrilce{transition:transform .25s ease}
+.buba-let .pk-l{transform-origin:20px 12px}
+.buba-let .pk-d{transform-origin:20px 12px}
+.buba-let .krila{opacity:0;transition:opacity .2s}
+.buba-let.leti .pk-l{transform:rotate(-32deg)}
+.buba-let.leti .pk-d{transform:rotate(32deg)}
+.buba-let.leti .krila{opacity:1}
+.buba-let.leti .krilo{animation:lepet .09s linear infinite alternate}
+.buba-let .krilo-l{transform-origin:18px 14px}
+.buba-let .krilo-d{transform-origin:22px 14px}
+@keyframes lepet{from{transform:scaleX(1)}to{transform:scaleX(.55)}}
+.buba-dugme.odletela{visibility:hidden}
+
 /* ---------- traka sa činjenicama ---------- */
 .cinjenice{background:var(--tekst);color:#fff}
 .cinjenice .omot{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;padding-block:22px}
@@ -583,6 +600,21 @@ footer a{color:#fff}
       <span class="srce s3"><svg fill="#7A5AD0"><use href="#srce"/></svg></span>
     </div>
   </div>
+
+  <!-- bubamara leti, leti... do globusa i nazad -->
+  <span class="buba-let" id="bubaLet" aria-hidden="true"><svg viewBox="0 0 40 40">
+    <g class="krila">
+      <ellipse class="krilo krilo-l" cx="9" cy="22" rx="9" ry="14" fill="#DDEFFA" fill-opacity=".85" stroke="#9FCDEA" stroke-width="1" transform="rotate(-25 9 22)"/>
+      <ellipse class="krilo krilo-d" cx="31" cy="22" rx="9" ry="14" fill="#DDEFFA" fill-opacity=".85" stroke="#9FCDEA" stroke-width="1" transform="rotate(25 31 22)"/>
+    </g>
+    <g stroke="#1F1A17" stroke-width="2" stroke-linecap="round"><path d="M9 17l-5-3M8 24H3M9 31l-5 3M31 17l5-3M32 24h5M31 31l5 3"/><path d="M17 5l-3-4M23 5l3-4" stroke-width="1.6"/></g>
+    <circle cx="14" cy="1.2" r="1.6" fill="#1F1A17"/><circle cx="26" cy="1.2" r="1.6" fill="#1F1A17"/>
+    <ellipse cx="20" cy="24" rx="10" ry="12" fill="#1F1A17"/>
+    <ellipse cx="20" cy="10" rx="7" ry="6" fill="#1F1A17"/>
+    <circle cx="17" cy="8.5" r="1.4" fill="#fff"/><circle cx="23" cy="8.5" r="1.4" fill="#fff"/>
+    <g class="pokrilce pk-l"><path d="M20 10.5 A13 14 0 0 0 20 38 Z" fill="#E63A2E" stroke="#1F1A17" stroke-width="1"/><circle cx="13.5" cy="19" r="2.8" fill="#1F1A17"/><circle cx="12.5" cy="28" r="2.4" fill="#1F1A17"/><ellipse cx="14" cy="14.5" rx="3" ry="1.6" fill="#fff" opacity=".45" transform="rotate(-30 14 14.5)"/></g>
+    <g class="pokrilce pk-d"><path d="M20 10.5 A13 14 0 0 1 20 38 Z" fill="#E63A2E" stroke="#1F1A17" stroke-width="1"/><circle cx="26.5" cy="19" r="2.8" fill="#1F1A17"/><circle cx="27.5" cy="28" r="2.4" fill="#1F1A17"/></g>
+  </svg></span>
 </section>
 
 <!-- ============ ČINJENICE ============ -->
@@ -832,6 +864,47 @@ footer a{color:#fff}
   document.getElementById('forma').addEventListener('submit',function(e){e.preventDefault();document.getElementById('hvala').hidden=false});
 
   document.getElementById('godina').textContent=new Date().getFullYear();
+
+  // bubamara leti, leti... sa dugmeta do globusa i nazad
+  (function(){
+    var hero=document.querySelector('.hero'),let=document.getElementById('bubaLet'),
+        sedi=document.querySelector('.buba-dugme'),glob=document.querySelector('.globus-omot svg');
+    if(!hero||!let||!sedi||!glob||!let.animate)return;
+    function centar(el){var r=el.getBoundingClientRect(),h=hero.getBoundingClientRect();return{x:r.left-h.left+r.width/2,y:r.top-h.top+r.height/2}}
+    function vidi(el){var r=el.getBoundingClientRect();return r.bottom>0&&r.top<innerHeight}
+    function ugao(a,b){return Math.atan2(b.x-a.x,-(b.y-a.y))*180/Math.PI}
+    function let1(a,b,trajanje){
+      var m={x:(a.x+b.x)/2,y:Math.min(a.y,b.y)-70},
+          k1={x:(a.x+m.x)/2,y:(a.y+m.y)/2-20},k2={x:(m.x+b.x)/2,y:(m.y+b.y)/2-20},
+          t=[a,k1,m,k2,b],kad=[0,.25,.5,.75,1],fr=[];
+      for(var i=0;i<t.length;i++){
+        var sl=t[Math.min(i+1,t.length-1)],pr=t[Math.max(i-1,0)];
+        fr.push({transform:'translate('+t[i].x+'px,'+t[i].y+'px) rotate('+ugao(pr,sl)+'deg)',offset:kad[i]});
+      }
+      return let.animate(fr,{duration:trajanje,easing:'ease-in-out',fill:'forwards'});
+    }
+    function polet(){
+      if(document.hidden||!vidi(sedi)||!vidi(glob)){return setTimeout(polet,4000)}
+      var a=centar(sedi),gr=glob.getBoundingClientRect(),h=hero.getBoundingClientRect(),
+          b={x:gr.left-h.left+gr.width*.5,y:gr.top-h.top+gr.height*(80/400)},
+          d=Math.hypot(b.x-a.x,b.y-a.y),tr=Math.max(1400,Math.min(2600,d*3.2));
+      let.style.transform='translate('+a.x+'px,'+a.y+'px)';let.style.opacity=1;
+      sedi.classList.add('odletela');let.classList.add('leti');
+      let1(a,b,tr).onfinish=function(){
+        let.animate([{transform:'translate('+b.x+'px,'+b.y+'px) rotate(0deg)'}],{duration:200,fill:'forwards'});
+        let.classList.remove('leti');
+        setTimeout(function(){
+          var a2=centar(sedi);let.classList.add('leti');
+          let1(b,a2,tr).onfinish=function(){
+            let.classList.remove('leti');
+            setTimeout(function(){let.style.opacity=0;sedi.classList.remove('odletela');let.getAnimations().forEach(function(x){x.cancel()})},250);
+            setTimeout(polet,18000);
+          };
+        },2200);
+      };
+    }
+    setTimeout(polet,5000);
+  })();
 })();
 </script>
 
