@@ -201,6 +201,47 @@ img,svg{max-width:100%}
 @keyframes lepet{from{transform:scaleX(1)}to{transform:scaleX(.55)}}
 .buba-dugme.odletela{visibility:hidden}
 
+/* bubamara na traci dokumentacije: obraduje se kad je sve spremno */
+.buba-traka{width:22px;height:22px;top:-22px;left:calc(50% + 22px);z-index:2;animation:osvrni 9s ease-in-out infinite}
+@keyframes osvrni{0%,62%{transform:rotate(20deg)}68%{transform:rotate(-18deg)}76%,84%{transform:rotate(-18deg)}90%,100%{transform:rotate(20deg)}}
+.buba-traka.radost{animation:radost .45s ease-in-out 4}
+@keyframes radost{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-12px) rotate(14deg)}}
+/* na listu u ikonici „Svaki dan napolju“ */
+.vrednost .ik{position:relative}
+.buba-list{width:17px;height:17px;top:6px;right:4px;animation:list 10s ease-in-out infinite}
+@keyframes list{0%,58%{transform:rotate(-35deg)}64%{transform:rotate(-80deg)}72%,86%{transform:translate(-5px,7px) rotate(-80deg)}92%{transform:translate(-5px,7px) rotate(-35deg)}100%{transform:rotate(-35deg)}}
+/* na kartici dana koja odgovara trenutnom vremenu */
+.trenutak{position:relative}
+.trenutak.sada{box-shadow:var(--senka-meka),inset 0 0 0 2.5px var(--sunce)}
+.sada-oznaka{font-family:var(--f-ruka);font-weight:700;font-size:1.15rem;color:var(--koral);margin-left:8px;vertical-align:2px}
+.buba-dan{width:20px;height:20px;top:-14px;right:28px;animation:dugme 9s ease-in-out infinite}
+/* spušta se niz tobogan u dvorištu */
+.kutak .slika{position:relative}
+.buba-tobogan{width:16px;height:16px;margin:-8px 0 0 -8px;left:57%;top:38%;animation:tobogan 12s ease-in-out infinite}
+@keyframes tobogan{
+  0%,42%{left:57%;top:38%;transform:rotate(140deg);opacity:1}
+  47%{left:65%;top:42%;transform:rotate(125deg)}
+  50%{left:71.5%;top:49.6%;transform:rotate(150deg)}
+  53%{left:76.7%;top:60.4%;transform:rotate(165deg)}
+  56%{left:80.7%;top:74.7%;transform:rotate(170deg)}
+  62%,74%{left:84%;top:80%;transform:rotate(100deg);opacity:1}
+  80%{left:84%;top:80%;opacity:0}
+  84%{left:57%;top:38%;transform:rotate(140deg);opacity:0}
+  90%,100%{left:57%;top:38%;transform:rotate(140deg);opacity:1}
+}
+/* prati otvoreno pitanje */
+.faq-lista{position:relative}
+.buba-faq{width:20px;height:20px;left:0;top:0;z-index:3;opacity:0;transition:left .9s ease-in-out,top .9s ease-in-out,transform .3s ease,opacity .3s}
+/* pokazuje put do vrtića na mapi */
+.buba-mapa{width:18px;height:18px;margin:-9px 0 0 -9px;left:4%;top:33.3%;animation:put 13s ease-in-out infinite}
+@keyframes put{
+  0%{left:4%;transform:rotate(90deg);opacity:0}
+  4%{opacity:1}
+  40%{left:43%;transform:rotate(90deg)}
+  48%{transform:rotate(55deg)} 56%{transform:rotate(120deg)} 62%,80%{left:43%;transform:rotate(90deg);opacity:1}
+  86%,100%{left:43%;opacity:0}
+}
+
 /* ---------- traka sa činjenicama ---------- */
 .cinjenice{background:var(--tekst);color:#fff}
 .cinjenice .omot{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;padding-block:22px}
@@ -647,6 +688,7 @@ footer a{color:#fff}
       </div>
 
       <div class="doks" id="dokumentacija">
+        <span class="buba buba-traka" aria-hidden="true"><svg><use href="#bubamara"/></svg></span>
         <h3>Potrebna dokumentacija</h3>
         <p class="mali">Štiklirajte šta ste već spremili. Spisak ostaje sačuvan na ovom uređaju.</p>
         <h4>Za dete</h4>
@@ -676,7 +718,7 @@ footer a{color:#fff}
     </div>
     <div class="vrednosti">
       <div class="vrednost"><div class="ik" style="background:rgba(46,155,214,.14)"><svg viewBox="0 0 40 40"><circle cx="14" cy="14" r="6" fill="#2E9BD6"/><circle cx="27" cy="16" r="5" fill="#F2683C"/><path d="M4 34c1-8 19-8 20 0M19 34c1-7 15-7 16 0" fill="#2E9BD6" opacity=".35"/></svg></div><h3>Male grupe</h3><p>Najviše 12 dece i dva vaspitača. Niko se ne izgubi u gužvi.</p></div>
-      <div class="vrednost"><div class="ik" style="background:rgba(88,180,74,.16)"><svg viewBox="0 0 40 40"><path d="M20 36V18" stroke="#58B44A" stroke-width="3" stroke-linecap="round"/><path d="M20 22c-8 0-12-6-12-12 8 0 12 5 12 12zM20 18c0-7 5-12 12-12 0 7-5 12-12 12z" fill="#58B44A"/></svg></div><h3>Svaki dan napolju</h3><p>Dvorište, šetnje i igra na vazduhu, kad god vreme dozvoli.</p></div>
+      <div class="vrednost"><div class="ik" style="background:rgba(88,180,74,.16)"><span class="buba buba-list" aria-hidden="true"><svg><use href="#bubamara"/></svg></span><svg viewBox="0 0 40 40"><path d="M20 36V18" stroke="#58B44A" stroke-width="3" stroke-linecap="round"/><path d="M20 22c-8 0-12-6-12-12 8 0 12 5 12 12zM20 18c0-7 5-12 12-12 0 7-5 12-12 12z" fill="#58B44A"/></svg></div><h3>Svaki dan napolju</h3><p>Dvorište, šetnje i igra na vazduhu, kad god vreme dozvoli.</p></div>
       <div class="vrednost"><div class="ik" style="background:rgba(255,194,60,.22)"><svg viewBox="0 0 40 40"><path d="M6 10h12a4 4 0 0 1 4 4v20a3 3 0 0 0-3-3H6zM34 10H24a2 2 0 0 0-2 2v22a3 3 0 0 1 3-3h9z" fill="#FFC23C"/></svg></div><h3>Bez ekrana</h3><p>Knjige, kocke, boje i muzika umesto telefona i televizora.</p></div>
       <div class="vrednost"><div class="ik" style="background:rgba(242,104,60,.14)"><svg viewBox="0 0 40 40"><use href="#srce" x="6" y="6" width="28" height="28" fill="#F2683C"/></svg></div><h3>Roditelji u toku</h3><p>Kratka poruka svakog dana: šta je dete jelo, kako je spavalo i čime se igralo.</p></div>
     </div>
@@ -753,7 +795,7 @@ footer a{color:#fff}
         <h3>Muzička soba</h3><p>Ksilofon, bubnjevi i pesme koje deca nose kući.</p>
       </article>
       <article class="kutak">
-        <div class="slika"><svg viewBox="0 0 300 225" aria-label="Ilustracija: dvorište"><rect width="300" height="225" fill="#DFF1FB"/><circle cx="250" cy="48" r="22" fill="#FFC23C"/><path d="M0 160q150-40 300 0v65H0z" fill="#7CCB60"/><path d="M0 182q150-30 300 0v43H0z" fill="#58B44A"/><rect x="48" y="96" width="10" height="70" rx="3" fill="#8A5A36"/><circle cx="53" cy="80" r="34" fill="#3E9A3A"/><circle cx="40" cy="72" r="6" fill="#F2683C"/><circle cx="64" cy="90" r="5" fill="#F2683C"/><path d="M150 168V86h22v82" stroke="#2E9BD6" stroke-width="6" fill="none" stroke-linejoin="round"/><path d="M150 100h22M150 118h22M150 136h22M150 154h22" stroke="#2E9BD6" stroke-width="4"/><path d="M172 86q50 10 70 82" stroke="#F2683C" stroke-width="12" fill="none" stroke-linecap="round"/><circle cx="110" cy="190" r="12" fill="#FFC23C" stroke="#fff" stroke-width="3"/></svg></div>
+        <div class="slika"><svg viewBox="0 0 300 225" aria-label="Ilustracija: dvorište"><rect width="300" height="225" fill="#DFF1FB"/><circle cx="250" cy="48" r="22" fill="#FFC23C"/><path d="M0 160q150-40 300 0v65H0z" fill="#7CCB60"/><path d="M0 182q150-30 300 0v43H0z" fill="#58B44A"/><rect x="48" y="96" width="10" height="70" rx="3" fill="#8A5A36"/><circle cx="53" cy="80" r="34" fill="#3E9A3A"/><circle cx="40" cy="72" r="6" fill="#F2683C"/><circle cx="64" cy="90" r="5" fill="#F2683C"/><path d="M150 168V86h22v82" stroke="#2E9BD6" stroke-width="6" fill="none" stroke-linejoin="round"/><path d="M150 100h22M150 118h22M150 136h22M150 154h22" stroke="#2E9BD6" stroke-width="4"/><path d="M172 86q50 10 70 82" stroke="#FFC23C" stroke-width="12" fill="none" stroke-linecap="round"/><circle cx="110" cy="190" r="12" fill="#FFC23C" stroke="#fff" stroke-width="3"/></svg><span class="buba buba-tobogan" aria-hidden="true"><svg><use href="#bubamara"/></svg></span></div>
         <h3>Dvorište</h3><p>Ograđeno dvorište sa toboganom, peskarom i senkom drveta.</p>
       </article>
     </div>
@@ -769,6 +811,7 @@ footer a{color:#fff}
       <h2>Roditelji nas najčešće pitaju</h2>
     </div>
     <div class="faq-lista">
+      <span class="buba buba-faq" id="bubaFaq" aria-hidden="true"><svg><use href="#bubamara"/></svg></span>
       <details class="faq"><summary>Da li ste u sistemu subvencije Grada Beograda?<span class="plus"></span></summary><div class="odg">Da. Imamo ugovor sa Gradom, pa subvenciju grad uplaćuje direktno vrtiću. Vi plaćate samo razliku do pune cene.</div></details>
       <details class="faq"><summary>Šta mi je potrebno za upis?<span class="plus"></span></summary><div class="odg">Odbijenica Grada Beograda, izvod iz matične knjige rođenih, fotokopija kartona vakcinacije i potvrda pedijatra za dete, i fotokopija očitane lične karte i uverenje o državljanstvu za jednog roditelja. Ceo spisak je gore, u delu „Potrebna dokumentacija”.</div></details>
       <details class="faq"><summary>Kako izgleda adaptacija?<span class="plus"></span></summary><div class="odg">Prvih dana roditelj može da ostane sa detetom, a vreme boravka produžavamo postepeno. Tempo dogovaramo zajedno, prema detetu.</div></details>
@@ -795,6 +838,7 @@ footer a{color:#fff}
         <div class="podatak"><span class="ik"><svg viewBox="0 0 24 24" fill="none" stroke="#2E9BD6" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><div><small>Radno vreme</small><b>Pon – Pet, 6:30 – 17:30</b></div></div>
         <a class="mapa" href="https://www.google.com/maps/search/Beograd" target="_blank" rel="noopener">
           <svg viewBox="0 0 400 180" aria-label="Ilustrovana mapa"><rect width="400" height="180" fill="#E3F1D8"/><path d="M0 60h400M0 130h400M90 0v180M250 0v180" stroke="#fff" stroke-width="18"/><path d="M0 60h400M0 130h400M90 0v180M250 0v180" stroke="#FFC23C" stroke-width="2" stroke-dasharray="10 10"/><rect x="110" y="76" width="50" height="36" rx="6" fill="#B9DCEF"/><rect x="270" y="10" width="60" height="34" rx="6" fill="#B9DCEF"/><circle cx="330" cy="100" r="16" fill="#7CCB60"/><circle cx="40" cy="160" r="12" fill="#7CCB60"/><path d="M200 36c-12 0-21 9-21 21 0 16 21 37 21 37s21-21 21-37c0-12-9-21-21-21z" fill="#F2683C"/><circle cx="200" cy="57" r="8" fill="#fff"/></svg>
+          <i class="buba buba-mapa" aria-hidden="true"><svg><use href="#bubamara"/></svg></i>
           <span>Otvori u Google mapama ↗</span>
         </a>
       </div>
@@ -848,7 +892,10 @@ footer a{color:#fff}
 
   // spisak dokumentacije
   var kut=[].slice.call(document.querySelectorAll('.stavka input')),nap=document.getElementById('napredak');
-  function osvezi(){var n=kut.filter(function(k){return k.checked}).length;nap.textContent=n===kut.length?'Sve je spremno ✓':n+' od '+kut.length+' spremno'}
+  var bubaT=document.querySelector('.buba-traka'),bilaSve=false;
+  function osvezi(){var n=kut.filter(function(k){return k.checked}).length,sve=n===kut.length;nap.textContent=sve?'Sve je spremno ✓':n+' od '+kut.length+' spremno';
+    if(sve&&!bilaSve&&bubaT){bubaT.classList.remove('radost');void bubaT.offsetWidth;bubaT.classList.add('radost');bubaT.addEventListener('animationend',function f(){bubaT.classList.remove('radost');bubaT.removeEventListener('animationend',f)})}
+    bilaSve=sve}
   try{var s=JSON.parse(localStorage.getItem('malisvet-doks')||'[]');kut.forEach(function(k,i){k.checked=!!s[i]})}catch(e){}
   kut.forEach(function(k){k.addEventListener('change',function(){osvezi();try{localStorage.setItem('malisvet-doks',JSON.stringify(kut.map(function(x){return x.checked})))}catch(e){}})});
   osvezi();
@@ -864,6 +911,34 @@ footer a{color:#fff}
   document.getElementById('forma').addEventListener('submit',function(e){e.preventDefault();document.getElementById('hvala').hidden=false});
 
   document.getElementById('godina').textContent=new Date().getFullYear();
+
+  // bubamara sedi na kartici dana koja odgovara trenutnom vremenu u Beogradu
+  (function(){
+    var kartice=[].slice.call(document.querySelectorAll('.trenutak'));if(!kartice.length)return;
+    var sat=new Date().getHours(),min=new Date().getMinutes();
+    try{var d=new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/Belgrade',hour:'2-digit',minute:'2-digit',hourCycle:'h23'}).format(new Date()).split(':');sat=+d[0];min=+d[1]}catch(e){}
+    var sad=sat*60+min,izabrana=kartice[0];
+    kartice.forEach(function(k){var t=k.querySelector('.vreme').textContent.split(':');if(+t[0]*60+(+t[1])<=sad)izabrana=k});
+    izabrana.classList.add('sada');
+    var o=document.createElement('span');o.className='sada-oznaka';o.textContent='← sada';izabrana.querySelector('.vreme').appendChild(o);
+    var b=document.createElement('span');b.className='buba buba-dan';b.setAttribute('aria-hidden','true');b.innerHTML='<svg><use href="#bubamara"/></svg>';izabrana.appendChild(b);
+  })();
+
+  // bubamara prati otvoreno pitanje
+  (function(){
+    var lista=document.querySelector('.faq-lista'),buba=document.getElementById('bubaFaq');if(!lista||!buba)return;
+    var trenutna=lista.querySelector('.faq');
+    function postavi(faq,prvi){
+      var p=faq.querySelector('.plus').getBoundingClientRect(),l=lista.getBoundingClientRect();
+      var x=p.left-l.left+p.width/2-10,y=p.top-l.top-15,staroY=parseFloat(buba.style.top)||y;
+      if(!prvi)buba.style.transform='rotate('+(y>staroY?180:0)+'deg)';
+      buba.style.left=x+'px';buba.style.top=y+'px';buba.style.opacity=1;
+      if(!prvi)setTimeout(function(){buba.style.transform='rotate(0deg)'},950);
+    }
+    lista.querySelectorAll('.faq').forEach(function(f){f.addEventListener('toggle',function(){if(f.open){trenutna=f;postavi(f)}})});
+    function pocetak(){buba.style.transition='none';postavi(trenutna,true);void buba.offsetWidth;buba.style.transition=''}
+    pocetak();addEventListener('resize',pocetak);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(pocetak);
+  })();
 
   // bubamara leti, leti... sa dugmeta do globusa i nazad
   (function(){
